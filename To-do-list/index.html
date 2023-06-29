@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      margin-top: 50px;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px;
+      margin-bottom: 5px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+    }
+
+    .completed {
+      background-color: #e0e0e0;
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do App</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button id="addButton">Add Task</button>
+    <ul id="taskList"></ul>
+    <h2>Completed Tasks</h2>
+    <ul id="completedList"></ul>
+  </div>
+
+  <script>
+    // JavaScript code
+    const taskInput = document.getElementById('taskInput');
+    const addButton = document.getElementById('addButton');
+    const taskList = document.getElementById('taskList');
+    const completedList = document.getElementById('completedList');
+
+    addButton.addEventListener('click', function() {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const listItem = document.createElement('li');
+        listItem.textContent = taskText;
+
+        const completeButton = document.createElement('button');
+        completeButton.textContent = 'Complete';
+        completeButton.classList.add('complete-button');
+        completeButton.addEventListener('click', function() {
+          listItem.classList.toggle('completed');
+          if (listItem.classList.contains('completed')) {
+            completedList.appendChild(listItem);
+          } else {
+            taskList.appendChild(listItem);
+          }
+        });
+
+        listItem.appendChild(completeButton);
+        taskList.appendChild(listItem);
+
+        taskInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
